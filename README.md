@@ -63,4 +63,4 @@ within these installed apps directory it will go to models and create schema for
 
 
 
-Project Developed by ### Pratik Patil.
+Project Developed by __Pratik Patil__.
