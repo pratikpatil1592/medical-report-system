@@ -61,4 +61,6 @@ Migrations are Django’s way of propagating changes you make to your models (ad
 It will go to settings.py and get INSTALLED_APPS
 within these installed apps directory it will go to models and create schema for whatever class you have specified.
 
-Project Developed by Pratik Patil.
+
+
+Project Developed by ### Pratik Patil.
