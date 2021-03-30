@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from api.models import CustomUser
+from api.models import CustomUser, FileUpload
 
 # User Serializer
 class UserSerializer(serializers.ModelSerializer):
@@ -29,5 +29,11 @@ class RegisterSerializer(serializers.ModelSerializer):
             patient_relation=validated_data['patient_relation'], 
             phone_number=validated_data['phone_number']
         )
-
         return user
+
+
+# File Upload Serializer
+class FileUploadSerializer(serializers.ModelSerializer):
+  class Meta():
+    model = FileUpload
+    fields = ('file', 'user', 'remark', 'description', 'timestamp')

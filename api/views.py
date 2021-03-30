@@ -1,13 +1,14 @@
 from django.contrib.auth import login
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.models import AuthToken
 from knox.views import LoginView as KnoxLoginView
-from .serializers import UserSerializer, RegisterSerializer
+from .serializers import UserSerializer, RegisterSerializer, FileUploadSerializer
 
-# Register API
+# Register API View
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
@@ -25,7 +26,7 @@ class RegisterAPI(generics.GenericAPIView):
         })
 
 
-
+# Login API View
 class LoginAPI(KnoxLoginView):
     permission_classes = (permissions.AllowAny,)
 
@@ -40,3 +41,24 @@ class LoginAPI(KnoxLoginView):
             "message": "Login Success",
             "data": login_data.data
         })
+
+
+# File Upload View
+class FileUploadView(APIView):
+  parser_classes = (MultiPartParser, FormParser)
+
+  def post(self, request, *args, **kwargs):
+    file_serializer = FileUploadSerializer(data=request.data)
+    if file_serializer.is_valid() and request.user.is_authenticated:
+      file_serializer.save()
+      return Response({
+            "status": "1",
+            "message": "File Uploaded Successfully.",
+            "data": file_serializer.data
+        }, status=status.HTTP_201_CREATED)
+    else:
+      return Response({
+            "status": "0",
+            "message": "File Upload Failed.",
+            "data": file_serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
