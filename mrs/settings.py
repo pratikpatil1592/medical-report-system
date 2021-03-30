@@ -67,6 +67,7 @@ ROOT_URLCONF = 'mrs.urls'
 
 AUTH_USER_MODEL = 'api.CustomUser'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -125,6 +126,10 @@ REST_FRAMEWORK = {
     ]
 }
 
+
+# Media Information
+MEDIA_URL = '/reports_data/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "reports_data")
 
 
 # Internationalization
