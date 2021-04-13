@@ -12,9 +12,10 @@ class CustomUser(AbstractUser):
     patient_name = models.CharField(null=True, max_length=100, default=None)
     patient_relation = models.CharField(null=True, max_length=15, default=None)
     phone_number = models.CharField(null=True, max_length=13, default=None)
+    doctor_name = models.CharField(null=True, max_length=100, default=None)
 
     def __str__(self):
-        return self.email
+        return self.patient_name
 
 
 
@@ -23,7 +24,10 @@ def patient_report_directory_path(instance, filename):
 
 class FileUpload(models.Model):
     file = models.FileField(upload_to=patient_report_directory_path, blank=False, null=False, default=None)
-    remark = models.CharField(max_length=50, default=None)
+    filetype = models.CharField(max_length=50, default=None)
     description = models.TextField(default=None)
     timestamp = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
+
+    def __str__(self):
+        return self.file

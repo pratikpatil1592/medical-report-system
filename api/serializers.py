@@ -36,4 +36,4 @@ class RegisterSerializer(serializers.ModelSerializer):
 class FileUploadSerializer(serializers.ModelSerializer):
   class Meta():
     model = FileUpload
-    fields = ('file', 'user', 'remark', 'description', 'timestamp')
+    fields = ('file', 'user', 'filetype', 'description', 'timestamp')
