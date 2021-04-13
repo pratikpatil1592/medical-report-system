@@ -1,7 +1,11 @@
 *.env
 *.sqlite3
 *.log
-*.pyc
 .vscode/*
 *.bak
 reports_data/
+**/__pycache__/
+*.pyc
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
